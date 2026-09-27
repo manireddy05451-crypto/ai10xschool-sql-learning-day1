@@ -1,0 +1,89 @@
+CREATE DATABASE college_db;
+
+USE college_db;
+
+
+-- ============================================
+-- STUDENTS TABLE
+-- ============================================
+
+CREATE TABLE students (
+    student_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    age INT,
+    gender VARCHAR(10),
+    department VARCHAR(30),
+    city VARCHAR(30),
+    marks INT
+);
+show tables;
+
+-- INSERT STUDENTS DATA
+
+INSERT INTO students VALUES
+(1, 'Ravi', 20, 'Male', 'CSE', 'Hyderabad', 85),
+(2, 'Anjali', 21, 'Female', 'AIML', 'Vijayawada', 92),
+(3, 'Kiran', 19, 'Male', 'ECE', 'Guntur', 76),
+(4, 'Sneha', 22, 'Female', 'CSE', 'Hyderabad', 88),
+(5, 'Manoj', 20, 'Male', 'AIML', 'Nellore', 95),
+(6, 'Priya', 21, 'Female', 'ECE', 'Chennai', 72),
+(7, 'Arjun', 23, 'Male', 'CSE', 'Guntur', 81),
+(8, 'Divya', 20, 'Female', 'AIML', 'Hyderabad', 89),
+(9, 'Rahul', 22, 'Male', 'ECE', 'Nellore', 68),
+(10, 'Pooja', 21, 'Female', 'CSE', 'Vijayawada', 94);
+select * from students;
+-- ============================================
+-- STUDENTS TABLE - CLAUSES PRACTICE
+-- ============================================
+
+-- WHERE CLAUSE-----------------------------------------------------------------------
+
+-- 1. Display students whose marks are greater than 80.
+select * from students where marks>80;
+
+-- 2. Display students whose age is greater than 20
+--    and belong to CSE department.
+select * from students where age>20 and department='cse';
+
+-- ORDER BY CLAUSE-----------------------------------------------------------------
+
+-- 3. Display students ordered by marks from highest
+--    to lowest.
+select * from students order by marks desc;
+
+-- 4. Display students ordered by department A-Z
+--    and marks from highest to lowest.
+select * from students order by department asc ,marks desc;
+
+-- LIMIT CLAUSE------------------------------------------------------------------
+
+-- 5. Display only the first 5 students.
+select * from students limit 5;
+
+-- 6. Display the top 3 students based on highest marks.
+select * from students order by marks desc limit 3;
+
+-- DISTINCT CLAUSE----------------------------------------------------------------------
+
+-- 7. Display all unique departments.
+select distinct department from students;
+
+-- 8. Display all unique cities.
+select distinct city from students;
+
+-- GROUP BY CLAUSE----------------------------------------------------------------------
+
+-- 9. Find the number of students in each department.
+select department ,count(*) from students group by department;
+
+-- 10. Find the average marks of each department.
+select department ,avg(marks) from students group by department;
+
+-- HAVING CLAUSE------------------------------------------------------------------------
+
+-- 11. Display departments having more than 2 students.
+select department, count(*) from students group by department having count(*)>2;
+
+-- 12. Display departments whose average marks
+--     are greater than 85.
+select department, avg(marks) from students group by department having avg(marks)>2;
