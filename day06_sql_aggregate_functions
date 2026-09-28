@@ -1,0 +1,46 @@
+-- ============================================
+-- AGGREGATE FUNCTIONS
+-- ============================================
+
+-- Aggregate Functions:
+-- Aggregate functions are used to perform calculations
+-- on multiple rows and return a single result.
+
+-- Main Aggregate Functions:
+--
+-- 1. COUNT()
+--    Counts the number of rows/values.
+--    Example: COUNT(salary)
+--
+-- 2. SUM()
+--    Calculates the total of numeric values.
+--    Example: SUM(salary)
+--
+-- 3. AVG()
+--    Calculates the average of numeric values.
+--    Example: AVG(salary)
+--
+-- 4. MAX()
+--    Returns the highest value.
+--    Example: MAX(salary)
+--
+-- 5. MIN()
+--    Returns the lowest value.
+--    Example: MIN(salary)
+--
+-- ============================================
+-- IMPORTANT:
+-- Aggregate Functions:
+-- COUNT()  -> Number
+-- SUM()    -> Total
+-- AVG()    -> Average
+-- MAX()    -> Highest
+-- MIN()    -> Lowest
+-- ============================================
+
+
+-- ============================================
+-- AGGREGATE FUNCTIONS PRACTICE
+-- ============================================
+
+  
