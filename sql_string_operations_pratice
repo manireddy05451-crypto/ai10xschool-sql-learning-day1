@@ -1,0 +1,530 @@
+SQL String Functions
+
+SQL String Functions are built-in functions used to work with and manipulate string/text data.
+
+They are useful for:
+
+- Combining strings
+- Changing uppercase/lowercase
+- Finding string length
+- Extracting parts of a string
+- Replacing text
+- Removing extra spaces
+- Reversing strings
+
+---
+
+1. CONCAT()
+
+Definition
+
+"CONCAT()" is used to combine two or more strings into a single string.
+
+Syntax
+
+SELECT CONCAT(str1, str2, ...);
+
+Example
+
+SELECT CONCAT('Data', ' ', 'Base');
+
+Output
+
+Data Base
+
+Practice Query 1
+
+Combine employee name and department.
+
+SELECT CONCAT(emp_name, ' - ', department) AS employee_details
+FROM employees;
+
+Practice Query 2
+
+Display employee name and city together.
+
+SELECT CONCAT(emp_name, ' - ', city) AS employee_location
+FROM employees;
+
+---
+
+2. UPPER()
+
+Definition
+
+"UPPER()" converts lowercase characters into uppercase.
+
+Syntax
+
+SELECT UPPER(string);
+
+Example
+
+SELECT UPPER('mani');
+
+Output
+
+MANI
+
+Practice Query 1
+
+Display all employee names in uppercase.
+
+SELECT UPPER(emp_name) AS employee_name
+FROM employees;
+
+Practice Query 2
+
+Display department names in uppercase.
+
+SELECT UPPER(department) AS department
+FROM employees;
+
+---
+
+3. LOWER()
+
+Definition
+
+"LOWER()" converts uppercase characters into lowercase.
+
+Syntax
+
+SELECT LOWER(string);
+
+Example
+
+SELECT LOWER('MANI');
+
+Output
+
+mani
+
+Practice Query 1
+
+Display all employee names in lowercase.
+
+SELECT LOWER(emp_name) AS employee_name
+FROM employees;
+
+Practice Query 2
+
+Display city names in lowercase.
+
+SELECT LOWER(city) AS city
+FROM employees;
+
+---
+
+4. LENGTH()
+
+Definition
+
+"LENGTH()" returns the length of a string.
+
+Syntax
+
+SELECT LENGTH(string);
+
+Example
+
+SELECT LENGTH('database');
+
+Output
+
+8
+
+Practice Query 1
+
+Find the length of each employee name.
+
+SELECT emp_name, LENGTH(emp_name) AS name_length
+FROM employees;
+
+Practice Query 2
+
+Find employees whose name has more than 5 characters.
+
+SELECT emp_name, LENGTH(emp_name) AS name_length
+FROM employees
+WHERE LENGTH(emp_name) > 5;
+
+---
+
+5. REPLACE()
+
+Definition
+
+"REPLACE()" replaces a specific part of a string with another string.
+
+Syntax
+
+SELECT REPLACE(str, old_text, new_text);
+
+Example
+
+SELECT REPLACE('mani', 'a', '@');
+
+Output
+
+m@ni
+
+Practice Query 1
+
+Replace Hyderabad with HYD.
+
+SELECT emp_name, REPLACE(city, 'Hyderabad', 'HYD') AS city
+FROM employees;
+
+Practice Query 2
+
+Replace IT with Information Technology.
+
+SELECT emp_name,
+       REPLACE(department, 'IT', 'Information Technology') AS department
+FROM employees;
+
+---
+
+6. LEFT()
+
+Definition
+
+"LEFT()" returns a specified number of characters from the beginning of a string.
+
+Syntax
+
+SELECT LEFT(string, count);
+
+Example
+
+SELECT LEFT('divya', 3);
+
+Output
+
+div
+
+Practice Query 1
+
+Display the first 3 characters of every employee name.
+
+SELECT emp_name, LEFT(emp_name, 3) AS first_3_characters
+FROM employees;
+
+Practice Query 2
+
+Display the first 2 characters of every city.
+
+SELECT city, LEFT(city, 2) AS first_2_characters
+FROM employees;
+
+---
+
+7. RIGHT()
+
+Definition
+
+"RIGHT()" returns a specified number of characters from the end of a string.
+
+Syntax
+
+SELECT RIGHT(string, count);
+
+Example
+
+SELECT RIGHT('divya', 2);
+
+Output
+
+ya
+
+Practice Query 1
+
+Display the last 3 characters of every employee name.
+
+SELECT emp_name, RIGHT(emp_name, 3) AS last_3_characters
+FROM employees;
+
+Practice Query 2
+
+Display the last 2 characters of every city.
+
+SELECT city, RIGHT(city, 2) AS last_2_characters
+FROM employees;
+
+---
+
+8. SUBSTR()
+
+Definition
+
+"SUBSTR()" is used to extract a specific part of a string starting from a given position.
+
+Syntax
+
+SELECT SUBSTR(str, start, length);
+
+Example
+
+SELECT SUBSTR('mani', 2, 2);
+
+Output
+
+an
+
+How it works
+
+m a n i
+1 2 3 4
+
+Starting from position "2" and taking "2" characters:
+
+a n
+
+So the output is:
+
+an
+
+Practice Query 1
+
+Extract 3 characters from each employee name starting from position 2.
+
+SELECT emp_name,
+       SUBSTR(emp_name, 2, 3) AS extracted_text
+FROM employees;
+
+Practice Query 2
+
+Extract the first 4 characters from each department name.
+
+SELECT department,
+       SUBSTR(department, 1, 4) AS department_short
+FROM employees;
+
+---
+
+9. REVERSE()
+
+Definition
+
+"REVERSE()" reverses the characters in a string.
+
+Syntax
+
+SELECT REVERSE(string);
+
+Example
+
+SELECT REVERSE('sql');
+
+Output
+
+lqs
+
+Practice Query 1
+
+Display every employee name in reverse.
+
+SELECT emp_name, REVERSE(emp_name) AS reversed_name
+FROM employees;
+
+Practice Query 2
+
+Display every city in reverse.
+
+SELECT city, REVERSE(city) AS reversed_city
+FROM employees;
+
+---
+
+10. TRIM()
+
+Definition
+
+"TRIM()" removes leading and trailing spaces from a string.
+
+Syntax
+
+SELECT TRIM(string);
+
+Example
+
+SELECT TRIM('  text  ');
+
+Output
+
+text
+
+Practice Query 1
+
+Remove unnecessary spaces from employee names.
+
+SELECT emp_name, TRIM(emp_name) AS trimmed_name
+FROM employees;
+
+Practice Query 2
+
+Remove unnecessary spaces from city names.
+
+SELECT city, TRIM(city) AS trimmed_city
+FROM employees;
+
+---
+
+11. SUBSTRING_INDEX()
+
+Definition
+
+"SUBSTRING_INDEX()" returns a part of a string based on a specified delimiter.
+
+Syntax
+
+SELECT SUBSTRING_INDEX(str, delimiter, count);
+
+Example
+
+SELECT SUBSTRING_INDEX('Mani Kumar Reddy', ' ', 1);
+
+Output
+
+Mani
+
+How it works
+
+String:
+
+Mani Kumar Reddy
+
+Delimiter:
+
+' '
+
+Count:
+
+1
+
+It returns the first part:
+
+Mani
+
+Practice Query 1
+
+Extract the first word from "Mani Kumar Reddy".
+
+SELECT SUBSTRING_INDEX('Mani Kumar Reddy', ' ', 1) AS first_name;
+
+Output
+
+Mani
+
+Practice Query 2
+
+Extract the first two words.
+
+SELECT SUBSTRING_INDEX('Mani Kumar Reddy', ' ', 2) AS first_two_words;
+
+Output
+
+Mani Kumar
+
+Practice Query 3
+
+Extract the first word from every employee name.
+
+SELECT emp_name,
+       SUBSTRING_INDEX(emp_name, ' ', 1) AS first_name
+FROM employees;
+
+---
+
+Quick Reference
+
+Function| Purpose
+"CONCAT()"| Combines strings
+"UPPER()"| Converts text to uppercase
+"LOWER()"| Converts text to lowercase
+"LENGTH()"| Finds string length
+"REPLACE()"| Replaces text
+"LEFT()"| Gets characters from the left
+"RIGHT()"| Gets characters from the right
+"SUBSTR()"| Extracts part of a string
+"REVERSE()"| Reverses a string
+"TRIM()"| Removes leading/trailing spaces
+"SUBSTRING_INDEX()"| Extracts text using a delimiter
+
+---
+
+Final Practice
+
+1. Display employee names in uppercase.
+
+SELECT UPPER(emp_name) AS employee_name
+FROM employees;
+
+2. Display employee names and their lengths.
+
+SELECT emp_name, LENGTH(emp_name) AS name_length
+FROM employees;
+
+3. Display first 3 characters of employee names.
+
+SELECT emp_name, LEFT(emp_name, 3) AS first_3
+FROM employees;
+
+4. Display last 3 characters of employee names.
+
+SELECT emp_name, RIGHT(emp_name, 3) AS last_3
+FROM employees;
+
+5. Display employee name and department together.
+
+SELECT CONCAT(emp_name, ' - ', department) AS employee_details
+FROM employees;
+
+6. Display employee names in reverse.
+
+SELECT emp_name, REVERSE(emp_name) AS reversed_name
+FROM employees;
+
+7. Replace Hyderabad with HYD.
+
+SELECT emp_name,
+       REPLACE(city, 'Hyderabad', 'HYD') AS city
+FROM employees;
+
+8. Display employees whose names contain more than 5 characters.
+
+SELECT emp_name, LENGTH(emp_name) AS name_length
+FROM employees
+WHERE LENGTH(emp_name) > 5;
+
+9. Extract the first word from employee names.
+
+SELECT emp_name,
+       SUBSTRING_INDEX(emp_name, ' ', 1) AS first_name
+FROM employees;
+
+10. Combine employee name and city.
+
+SELECT CONCAT(emp_name, ' lives in ', city) AS employee_location
+FROM employees;
+
+---
+
+What I Practiced
+
+I practiced the following SQL String Functions:
+
+- "CONCAT()"
+- "UPPER()"
+- "LOWER()"
+- "LENGTH()"
+- "REPLACE()"
+- "LEFT()"
+- "RIGHT()"
+- "SUBSTR()"
+- "REVERSE()"
+- "TRIM()"
+- "SUBSTRING_INDEX()"
+
+I also practiced these functions using the "employees" table and learned how to use them with "SELECT" and "WHERE" clauses.
