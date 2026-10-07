@@ -1,0 +1,334 @@
+# MySQL Date Functions – Practice
+
+## 1. Database & Table
+
+```sql
+CREATE DATABASE date_functions_practice;
+USE date_functions_practice;
+
+CREATE TABLE employees (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(50),
+    department VARCHAR(30),
+    salary INT,
+    joining_date DATE,
+    birth_date DATE
+);
+```
+
+## 2. Insert Sample Data
+
+```sql
+INSERT INTO employees
+(emp_id, emp_name, department, salary, joining_date, birth_date)
+VALUES
+(101, 'Ravi', 'IT', 55000, '2022-01-15', '1999-05-20'),
+(102, 'Kiran', 'HR', 45000, '2021-06-10', '1998-11-12'),
+(103, 'Suresh', 'IT', 65000, '2023-03-25', '2000-02-18'),
+(104, 'Arjun', 'Finance', 50000, '2020-09-05', '1997-08-30'),
+(105, 'Priya', 'HR', 48000, '2022-12-20', '2001-01-15'),
+(106, 'Manoj', 'IT', 70000, '2019-04-12', '1996-12-25'),
+(107, 'Anjali', 'Marketing', 52000, '2024-02-01', '2002-07-10'),
+(108, 'Vamsi', 'Finance', 58000, '2021-11-18', '1999-03-05');
+```
+
+## 3. View Table
+
+```sql
+SELECT * FROM employees;
+```
+
+---
+
+# Date Functions Practice
+
+## Q1. Display the current date.
+
+```sql
+SELECT CURDATE() AS current_date;
+```
+
+## Q2. Display the current date and time.
+
+```sql
+SELECT NOW() AS current_datetime;
+```
+
+## Q3. Extract the joining year of each employee.
+
+```sql
+SELECT emp_name, joining_date,
+       YEAR(joining_date) AS joining_year
+FROM employees;
+```
+
+## Q4. Extract the joining month of each employee.
+
+```sql
+SELECT emp_name, joining_date,
+       MONTH(joining_date) AS joining_month
+FROM employees;
+```
+
+## Q5. Extract the joining day of each employee.
+
+```sql
+SELECT emp_name, joining_date,
+       DAY(joining_date) AS joining_day
+FROM employees;
+```
+
+## Q6. Display the weekday name of the joining date.
+
+```sql
+SELECT emp_name, joining_date,
+       DAYNAME(joining_date) AS joining_day_name
+FROM employees;
+```
+
+## Q7. Display the month name of the joining date.
+
+```sql
+SELECT emp_name, joining_date,
+       MONTHNAME(joining_date) AS joining_month_name
+FROM employees;
+```
+
+---
+
+# Date Calculation Functions
+
+## Q8. Find how many days each employee has been working in the company.
+
+```sql
+SELECT emp_name, joining_date,
+       DATEDIFF(CURDATE(), joining_date) AS days_in_company
+FROM employees;
+```
+
+## Q9. Find the date 30 days after the joining date.
+
+```sql
+SELECT emp_name, joining_date,
+       DATE_ADD(joining_date, INTERVAL 30 DAY) AS after_30_days
+FROM employees;
+```
+
+## Q10. Find the date 1 year after the joining date.
+
+```sql
+SELECT emp_name, joining_date,
+       DATE_ADD(joining_date, INTERVAL 1 YEAR) AS after_1_year
+FROM employees;
+```
+
+## Q11. Find the date 6 months before the joining date.
+
+```sql
+SELECT emp_name, joining_date,
+       DATE_SUB(joining_date, INTERVAL 6 MONTH) AS before_6_months
+FROM employees;
+```
+
+## Q12. Calculate the current age of each employee.
+
+```sql
+SELECT emp_name, birth_date,
+       TIMESTAMPDIFF(YEAR, birth_date, CURDATE()) AS age
+FROM employees;
+```
+
+---
+
+# Date Filtering Practice
+
+## Q13. Find employees who joined in 2022.
+
+```sql
+SELECT *
+FROM employees
+WHERE YEAR(joining_date) = 2022;
+```
+
+## Q14. Find employees who joined after 2021.
+
+```sql
+SELECT *
+FROM employees
+WHERE joining_date > '2021-12-31';
+```
+
+## Q15. Find employees who joined in January.
+
+```sql
+SELECT *
+FROM employees
+WHERE MONTH(joining_date) = 1;
+```
+
+## Q16. Find employees who joined after January 1, 2022.
+
+```sql
+SELECT *
+FROM employees
+WHERE joining_date > '2022-01-01';
+```
+
+## Q17. Find employees who joined between 2020 and 2023.
+
+```sql
+SELECT *
+FROM employees
+WHERE joining_date BETWEEN '2020-01-01' AND '2023-12-31';
+```
+
+---
+
+# Date Formatting Practice
+
+## Q18. Display joining date in `15 January 2022` format.
+
+```sql
+SELECT emp_name,
+       DATE_FORMAT(joining_date, '%d %M %Y') AS formatted_date
+FROM employees;
+```
+
+## Q19. Display joining date in `15-01-2022` format.
+
+```sql
+SELECT emp_name,
+       DATE_FORMAT(joining_date, '%d-%m-%Y') AS formatted_date
+FROM employees;
+```
+
+## Q20. Display joining date in `January 2022` format.
+
+```sql
+SELECT emp_name,
+       DATE_FORMAT(joining_date, '%M %Y') AS formatted_date
+FROM employees;
+```
+
+## Q21. Display employee name and joining month.
+
+```sql
+SELECT emp_name,
+       MONTHNAME(joining_date) AS joining_month
+FROM employees;
+```
+
+## Q22. Display employee name and joining year.
+
+```sql
+SELECT emp_name,
+       YEAR(joining_date) AS joining_year
+FROM employees;
+```
+
+---
+
+# Challenge Practice
+
+## Q23. Find employees who have more than 3 years of experience.
+
+```sql
+SELECT emp_name, joining_date,
+       TIMESTAMPDIFF(YEAR, joining_date, CURDATE()) AS experience
+FROM employees
+WHERE TIMESTAMPDIFF(YEAR, joining_date, CURDATE()) > 3;
+```
+
+## Q24. Find employees whose age is greater than 25.
+
+```sql
+SELECT emp_name, birth_date,
+       TIMESTAMPDIFF(YEAR, birth_date, CURDATE()) AS age
+FROM employees
+WHERE TIMESTAMPDIFF(YEAR, birth_date, CURDATE()) > 25;
+```
+
+## Q25. Find IT employees who joined in 2022.
+
+```sql
+SELECT *
+FROM employees
+WHERE department = 'IT'
+AND YEAR(joining_date) = 2022;
+```
+
+## Q26. Find employees who have completed more than 1000 days in the company.
+
+```sql
+SELECT emp_name, joining_date,
+       DATEDIFF(CURDATE(), joining_date) AS days_in_company
+FROM employees
+WHERE DATEDIFF(CURDATE(), joining_date) > 1000;
+```
+
+## Q27. Display employee name, joining date and weekday name.
+
+```sql
+SELECT emp_name,
+       joining_date,
+       DAYNAME(joining_date) AS weekday
+FROM employees;
+```
+
+## Q28. Display employee's birth month and joining month.
+
+```sql
+SELECT emp_name,
+       MONTHNAME(birth_date) AS birth_month,
+       MONTHNAME(joining_date) AS joining_month
+FROM employees;
+```
+
+## Q29. Calculate the date when each employee completes 5 years in the company.
+
+```sql
+SELECT emp_name,
+       joining_date,
+       DATE_ADD(joining_date, INTERVAL 5 YEAR) AS five_year_completion
+FROM employees;
+```
+
+## Q30. Find the longest-serving employee.
+
+```sql
+SELECT *
+FROM employees
+ORDER BY joining_date ASC
+LIMIT 1;
+```
+
+---
+
+# Functions Practiced
+
+| Function | Purpose |
+|---|---|
+| `CURDATE()` | Current date |
+| `NOW()` | Current date + time |
+| `YEAR()` | Extract year |
+| `MONTH()` | Extract month number |
+| `DAY()` | Extract day |
+| `DAYNAME()` | Get weekday name |
+| `MONTHNAME()` | Get month name |
+| `DATEDIFF()` | Difference between dates |
+| `DATE_ADD()` | Add time to a date |
+| `DATE_SUB()` | Subtract time from a date |
+| `DATE_FORMAT()` | Format a date |
+| `TIMESTAMPDIFF()` | Calculate difference in years/months/days |
+
+## GitHub Practice Structure
+
+```text
+SQL-Date-Functions/
+│
+├── README.md
+│
+└── date_functions_practice.sql
+```
+
+`date_functions_practice.sql` lo **CREATE → INSERT → SELECT → 30 practice queries** maintain cheyyi. `README.md` lo functions practiced list + short description add cheyyi.
